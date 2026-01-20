@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Oyukaashiii</title></title>
+    <title>Memory Lane - Birthday Video</title>
 
     <link
       href="https://fonts.googleapis.com/css2?familyPacifico&family=Poppins:wght@400;600&display=swap"
@@ -177,11 +177,13 @@
 
     <!-- VIDEO -->
     <div class="video-container">
-      <video id="memoryVideo" controls autoplay playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1V2TwGikIwe4LO9DTxHBHMXtJv9GBJXo-" type="video/mp4" />
-        Your browser does not support video.
-      </video>
+      <iframe id="videoFrame" src="https://drive.google.com/file/d/1V2TwGikIwe4LO9DTxHBHMXtJv9GBJXo-/preview" allow="autoplay" style="width: 80%; max-width: 700px; height: 500px; border: 8px solid white; border-radius: 30px; box-shadow: 0 20px 45px rgba(255, 105, 180, 0.45);"></iframe>
     </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" autoplay loop style="display: none;">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=relaxing-145038.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- NAVIGATION -->
     <div class="navigation-buttons">
@@ -193,6 +195,24 @@
 
     <!-- JS -->
     <script>
+      // Autoplay background music
+      window.addEventListener('load', function() {
+        const audio = document.getElementById('backgroundMusic');
+        if (audio) {
+          audio.play().catch(e => console.log('Audio autoplay blocked:', e));
+        }
+      });
+
+      // Try to autoplay iframe video
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+          const iframe = document.getElementById('videoFrame');
+          if (iframe) {
+            iframe.src += '?autoplay=1';
+          }
+        }, 500);
+      });
+
       function goBack() {
         window.location.href = "index.html";
       }
